@@ -25,10 +25,13 @@ public class TestApp {
 		//System.out.println("Quale è la linea di Forlì?");
 		//System.out.println(map.get("Forlì"));
 		
-		JSONClientResource JSON = new JSONClientResource();
-		JSONObject query = JSON.prepareJSON(list);
+		JSONClientResource JSON = new JSONClientResource(list);
+		List<JSONObject> query = JSON.prepareJSON(82);
 		
-		//JSON.ask(query);
+		
+		for(JSONObject o: query) {
+			System.out.println(o.toString());
+		}
 	}
 
 }

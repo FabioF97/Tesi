@@ -35,7 +35,7 @@ public class Coordinates {
 	public String getPath() {
 		return path;
 	}
-	 //fatto fino a rovigo
+	
 	//per qualche strana ragione non riesce a calcolare la distanza da agrigento a l'aquila, ma il contrario sì
 	//stessa cosa per andare a pistoia e roma ma se si mettono i nomi invece che le coordinate va tutto bene
 	public void addCoordinates(List<ChiefTown> list, HashMap<String,Integer> map) throws FileNotFoundException, IOException, ParseException {
