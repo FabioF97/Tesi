@@ -11,6 +11,8 @@ public class MatrixObject {
 		this.dest = dest;
 		this.distance = distance/0.62137;
 		this.time = time/60;
+		this.distance = Math.round(this.distance);
+		this.time = Math.round(this.time);
 	}
 	
 	
@@ -65,7 +67,7 @@ public class MatrixObject {
 
 	@Override
 	public String toString() {
-		return "distance=" + distance + ", time=" + time;
+		return distance + "km, " + time + "m";
 	}
 
 }

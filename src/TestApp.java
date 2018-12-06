@@ -1,9 +1,7 @@
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
 import org.restlet.resource.ResourceException;
 
@@ -12,26 +10,28 @@ public class TestApp {
 	public static void main(String[] args) throws IOException, ResourceException, ParseException {
 		CSVReader csv = new CSVReader();
 		List<ChiefTown> list = csv.readCSV(csv.getPath());
-		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		HashMap<String, Integer> mapIndex = new HashMap<String, Integer>();
+		HashMap<Integer, ChiefTown> mapTown = new HashMap<Integer, ChiefTown>();
 		int n = 0;
 		for(ChiefTown t: list) {
-			map.put(t.getName(), n);
+			mapIndex.put(t.getName(), n);
 			++n;
 		}
 		
 		Coordinates str = new Coordinates();
-		str.addCoordinates(list, map);
+		str.addCoordinates(list, mapIndex);
 		
-		//System.out.println("Quale è la linea di Forlì?");
-		//System.out.println(map.get("Forlì"));
-		
-		JSONClientResource JSON = new JSONClientResource(list);
-		List<JSONObject> query = JSON.prepareJSON(82);
-		
-		
-		for(JSONObject o: query) {
-			System.out.println(o.toString());
+		n = 0;
+		for(ChiefTown t: list) {
+			mapTown.put(n, t);
+			++n;
 		}
+		
+		Matrix matrix = new Matrix(list.size(), list, mapIndex, mapTown);
+		//matrix.fillRow(0);
+		matrix.print2D(matrix.getMatrix());
+		System.out.println("Ritorno informazioni sulla tratta Agrigento -> Milano");
+		System.out.println(matrix.print(mapIndex.get("Agrigento"), mapIndex.get("Milano")));
 	}
 
 }

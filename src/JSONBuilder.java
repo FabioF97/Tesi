@@ -6,23 +6,12 @@ import org.json.simple.JSONObject;
 
 public class JSONBuilder {
 	
-	List<ChiefTown> list;
+	private List<ChiefTown> list;
 	
 	public JSONBuilder(List<ChiefTown> list) {
 		this.list = list;
 	}
 	
-	public boolean isGood(JSONObject obj) {
-		JSONArray array = (JSONArray) obj.get("distance");
-		for (int i = 1; i < array.size(); i++) {
-			  String value = (String) array.get(i).toString();
-			  if(value.equals("0"))
-				  return false;
-		}
-		return true;
-	}
-	
-
 	/**
 	 * Questo metodo accetta due stringhe (due città o due coppie di coordinate)
 	 * e ritorna un file json che permetterà di andare a fare il routing tra due città
@@ -30,12 +19,12 @@ public class JSONBuilder {
 	 * @param dst
 	 * @return
 	 */
-	public static JSONObject simpleJSON(String src, String dst) {
+	public JSONObject simpleJSON(int src, int dst) {
 		JSONArray array = new JSONArray();
 		JSONObject obj = new JSONObject();
 		JSONObject obj2 = new JSONObject();
-		array.add(src);
-		array.add(dst);
+		array.add(list.get(src).getName() + ",IT");
+		array.add(list.get(dst).getName() + ",IT");
 		obj2.put("allToAll", false);
 		obj2.put("manyToOne", false);
 		obj2.put("oneToMany", true);
@@ -58,13 +47,13 @@ public class JSONBuilder {
 			JSONObject obj = new JSONObject();
 			JSONObject obj2 = new JSONObject();
 			ChiefTown town = list.get(src); //metto nel jsonobject come primo elemento sempre la città che identifica la riga da riempire
-			array.add(town.getName());
+			array.add(town.getCoordinates());
 			
 			for(int i = index; i < index + 25; ++i) {
 				if(i >= list.size())
 					break;
 				town = list.get(i);
-				array.add(town.getName());
+				array.add(town.getCoordinates());
 			}
 	
 			index += 25; //incremento index di 25 così la prossima città sara quella dopo l'ultima inserita in lista
