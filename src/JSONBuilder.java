@@ -23,8 +23,8 @@ public class JSONBuilder {
 		JSONArray array = new JSONArray();
 		JSONObject obj = new JSONObject();
 		JSONObject obj2 = new JSONObject();
-		array.add(list.get(src).getName() + ",IT");
-		array.add(list.get(dst).getName() + ",IT");
+		array.add(list.get(src).getCoordinates());
+		array.add(list.get(dst).getCoordinates());
 		obj2.put("allToAll", false);
 		obj2.put("manyToOne", false);
 		obj2.put("oneToMany", true);
@@ -39,7 +39,7 @@ public class JSONBuilder {
 	 * @return
 	 */
 	public List<JSONObject> prepareJSON(int src) {
-		int index = src + 1;
+		int index = 0;
 		List<JSONObject> objs = new ArrayList<JSONObject>();
 		
 		while(index < list.size()) {

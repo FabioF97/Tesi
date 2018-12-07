@@ -1,6 +1,8 @@
+import java.io.Serializable;
 
-public class ChiefTown implements Comparable<ChiefTown>{
+public class ChiefTown implements Comparable<ChiefTown>, Serializable{
 
+	private static final long serialVersionUID = 1L;
 	private String name;
 	private String region;
 	private String lat;

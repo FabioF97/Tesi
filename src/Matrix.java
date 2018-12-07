@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -8,8 +9,9 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
 import org.restlet.resource.ResourceException;
 
-public class Matrix {
+public class Matrix implements Serializable{
 	
+	private static final long serialVersionUID = 1L;
 	private MatrixObject[][] matrix;
 	private List<ChiefTown> list;
 	private HashMap<String, Integer> mapIndex;
@@ -47,22 +49,17 @@ public class Matrix {
 		return ret;
 	}
 	
-	private MatrixObject diagElem(int i) {
-		ChiefTown town = mapTown.get(i);
-		return new MatrixObject(town, town, .0, .0);
-	}
 	
 	public void fillMatrix() throws ResourceException, IOException, ParseException {
 		for(int i = 0; i < getDim(); ++i) {
-			insert(diagElem(i), i, i);
 			fillRow(i);
 		}
 	}
 	
-	private void fillRow(int i) throws ResourceException, IOException, ParseException {
+	public void fillRow(int i) throws ResourceException, IOException, ParseException {
 		JSONBuilder builder = new JSONBuilder(list);
 		JSONClientResource client = new JSONClientResource();
-		int r = i;
+		int r = 0;
 		
 		List<JSONObject> objs = builder.prepareJSON(i); //Si preparano i JSONObject necessari per la città
 		
@@ -78,19 +75,17 @@ public class Matrix {
 			JSONArray time = (JSONArray) ret.get("time");
 			
 			for(int k = 1; k < distance.size(); ++k) {
-				++r;
 				double miles = Double.parseDouble((String) distance.get(k).toString());
 				double sec = Double.parseDouble((String) time.get(k).toString());
-				//Se è riuscito a fare il routing ho trovato dati non nulli quindi li inserisco in matrice
-				if((miles != 0) && (sec != 0)) {
+				//Se è riuscito a fare il routing ho trovato dati non nulli  oppure appartengono alla diagonale quindi li inserisco in matrice
+				if(((miles != 0) && (sec != 0)) || (r == i)) {
 					MatrixObject val = buildObject(i, r, miles, sec);
 					insert(val, i, r);
-					val = buildObject(r, i, miles, sec);
-					insert(val, r, i);
+					++r;
 				}
 				//Altrimenti vado a correggere l'errore nel routing facendo una nuova query
 				else {
-					JSONObject query = builder.simpleJSON(i, r);
+					JSONObject query = builder.simpleJSON(r, i);
 					System.out.println("Va a correggere questo errore:");
 					System.out.println(query.toString());
 					JSONObject correction = client.ask(query);
@@ -105,19 +100,20 @@ public class Matrix {
 					if((miles != 0) && (sec != 0)) {
 						MatrixObject val = buildObject(i, r, miles, sec);
 						insert(val, i, r);
-						val = buildObject(r, i, miles, sec);
-						insert(val, r, i);
+						++r;
 					}
 					else {
 						System.out.println("ERROR ERROR!!!");
+						++r;
 					}
 				}
 			}
 		}
 	}
 	
-	public void print2D(MatrixObject mat[][]) 
-    { 
+	public void print2D() {
+		
+		MatrixObject mat[][] = matrix;
         // Loop through all rows 
         for (MatrixObject[] row : mat) 
   

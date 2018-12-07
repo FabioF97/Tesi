@@ -1,6 +1,8 @@
+import java.io.Serializable;
 
-public class MatrixObject {
+public class MatrixObject implements Serializable{
 	
+	private static final long serialVersionUID = 1L;
 	ChiefTown src;
 	ChiefTown dest;
 	double distance;
@@ -67,7 +69,7 @@ public class MatrixObject {
 
 	@Override
 	public String toString() {
-		return distance + "km, " + time + "m";
+		return src.getName() + "-->" + dest.getName() + " " + distance + "km, " + time + "m";
 	}
 
 }
