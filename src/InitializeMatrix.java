@@ -25,7 +25,7 @@ public class InitializeMatrix {
 		Coordinates str = new Coordinates();
 		str.addCoordinates(list, mapIndex);
 		//Roma ha coordinate orrende, conviene cambiarle manualmente altrimenti non fa nessun routing
-		//list.get(mapIndex.get("Roma")).setCoordinates("41.8919300", "12.5113300");
+		list.get(mapIndex.get("Roma")).setCoordinates("41.8919300", "12.5113300");
 		
 		n = 0;
 		for(ChiefTown t: list) {

@@ -13,7 +13,7 @@ public class JSONClientResource {
     JSONParser parser;
 	
 	public JSONClientResource() {
-		rs01 = new ClientResource("http://www.mapquestapi.com/directions/v2/routematrix?key=fZMuFFGhqbQR6fwzuIyxo8shhxso0xtI");
+		rs01 = new ClientResource("http://www.mapquestapi.com/directions/v2/routematrix?key=nunehvH3xI92AFjMywRPHdPdWtXUiwUU");
 		parser = new JSONParser();
 	}
 	

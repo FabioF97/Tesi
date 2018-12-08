@@ -24,6 +24,20 @@ public class Matrix implements Serializable{
 		this.mapTown = mapTown;
 	}
 	
+	public List<ChiefTown> getList(){
+		return list;
+	}
+	
+	
+	public HashMap<String, Integer> getMapIndex(){
+		return mapIndex;
+	}
+	
+	
+	public HashMap<Integer, ChiefTown> getMapTown(){
+		return mapTown;
+	}
+	
 	public MatrixObject get(int i, int j) {
 		return matrix[i][j];
 	}
