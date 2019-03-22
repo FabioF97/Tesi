@@ -58,6 +58,13 @@ public class ChiefTown implements Comparable<ChiefTown>, Serializable{
 		return lat + "," + lon;
 	}
 
+	public String getLat() {
+		return lat;
+	}
+	
+	public String getLon() {
+		return lon;
+	}
 
 	@Override
 	public int compareTo(ChiefTown town) {

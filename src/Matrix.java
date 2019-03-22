@@ -24,6 +24,10 @@ public class Matrix implements Serializable{
 		this.mapTown = mapTown;
 	}
 	
+	public ChiefTown getTown(int i) {
+		return mapTown.get(i);
+	}
+	
 	public List<ChiefTown> getList(){
 		return list;
 	}
@@ -78,12 +82,8 @@ public class Matrix implements Serializable{
 		List<JSONObject> objs = builder.prepareJSON(i); //Si preparano i JSONObject necessari per la città
 		
 		for(int j = 0; j < objs.size(); ++j) {
-			//System.out.println("Questo è quello che viene richiesto:");
-			//System.out.println(objs.get(j).toString());
 			JSONObject ret = client.ask(objs.get(j));
-			//System.out.println("Questo è quello che risposto:");
-			//System.out.println(ret.toString());
-			
+
 			//Leggo gli array con distanze e tempi
 			JSONArray distance = (JSONArray) ret.get("distance");
 			JSONArray time = (JSONArray) ret.get("time");
@@ -122,6 +122,13 @@ public class Matrix implements Serializable{
 					}
 				}
 			}
+		}
+	}
+	
+	public void printRow(int i) {
+		MatrixObject[] row = matrix[i];
+		for(int j = 0; j < list.size(); ++j) {
+			System.out.println(row[j]);
 		}
 	}
 	
