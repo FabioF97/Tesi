@@ -99,10 +99,10 @@ public class TestApp {
 	*/
 	
 	public static void main(String[] args) throws IOException, ResourceException, ParseException {
-		
+		//reso il grafico undirected
 		Matrix matrix = InitializeMatrix.loadMatrix();
-		ArrayList<String> t = EdgesHandler.getBorder("Umbria");
-		System.out.println(t);
+		new GEXFMaker(matrix);
+		System.out.println("Fine");
 		
 		
 	}

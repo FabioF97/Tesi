@@ -54,7 +54,7 @@ public class EdgesHandler {
 			ret.add("Lazio");
 			ret.add("Marche");
 		}
-		if("Marche".equals(ret)) {
+		if("Marche".equals(src)) {
 			ret.add("Emilia-Romagna");
 			ret.add("Toscana");
 			ret.add("Umbria");
@@ -104,8 +104,10 @@ public class EdgesHandler {
 		if("Calabria".equals(src)) {
 			ret.add("Basilicata");
 		}
-		if(ret.size() == 0)
+		if(ret.size() == 0) {
 			System.out.println("Non sono state trovate regioni confinanti");
+			System.out.println(src);
+		}
 		return ret;
 	}
 	

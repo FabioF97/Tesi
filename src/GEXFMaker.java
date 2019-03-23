@@ -13,7 +13,11 @@ public class GEXFMaker {
 	
 	public GEXFMaker(Matrix matrix) {
 		this.matrix = matrix;
-		write();
+		try {
+			write();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	private void write() throws IOException {
@@ -28,7 +32,7 @@ public class GEXFMaker {
 					"		<creator>Fabio Fontana</creator>\r\n" + 
 					"		<description>Input file for Gephi</description>\r\n" + 
 					"	</meta>\r\n" +
-					"	<graph defaultedgetype=\"directed\" idtype=\"string\" mode=\"static\">\r\n" + 
+					"	<graph defaultedgetype=\"undirected\" idtype=\"string\" mode=\"static\">\r\n" + 
 					"		<attributes class=\"node\" mode=\"static\">\r\n" +
 					"			<attribute id=\"0\" title=\"Region\" type=\"string\"/>\r\n" +  
 					"           <attribute id=\"1\" title=\"Latitude\" type=\"double\"/>\r\n" +  
@@ -46,17 +50,6 @@ public class GEXFMaker {
 			}
 			writer.write("		</nodes>\r\n" + 
 					"		<edges>\r\n"); //"		<edges count=\"11772\">\r\n");
-			/*
-			int k = 0;
-			for(int i = 0; i < 109; ++i) {
-				for(int j = 0; j < 109; ++j) {
-					if(i != j) {
-						insertEdge(writer, i, j, k);
-						++k;
-					}
-				}
-			}
-			*/
 			insertEdges(writer);
 			writer.write("		</edges>\r\n" + 
 					"	</graph>\r\n" + 
@@ -83,10 +76,20 @@ public class GEXFMaker {
 				"			</node>\r\n");
 	}
 	
-	private void insertEdges(Writer writer) {
+	private boolean checkEdge(ChiefTown src, ChiefTown dst, ArrayList<String> borders) {
+		if(borders.contains(dst.getRegion()))
+			return true;
+		if(src.getRegion().equals(dst.getRegion()))
+			return true;
+		if("Palermo".equals(src.getName()) && "Cagliari".equals(dst.getName()))
+			return true;
+		return false;
+	}
+	
+	private void insertEdges(Writer writer) throws IOException {
 		int i;
 		int j;
-		MatrixObject obj;
+		int n = 0;
 		ChiefTown src;
 		ChiefTown dst;
 		ArrayList<String> borders;
@@ -95,10 +98,13 @@ public class GEXFMaker {
 			src = matrix.getTown(i);
 			borders = EdgesHandler.getBorder(src.getRegion());
 			//per ogni possibile destinazione
-			for(j = 0; j < 109; ++j) {
-				dst = matrix.getTown(j);
-				if(borders.contains(dst.getRegion()) == true) {
-					//aggiungi incrementanto l'indice
+			for(j = 0; j < i; ++j) {  //SE SI PASSA A DIRECTED BISOGNA METTERE J < 109
+				if(i != j) {
+					dst = matrix.getTown(j);
+					//Se i capoluoghi sono in regioni confinanti o nella stessa regione creo un edge
+					if(checkEdge(src, dst, borders)) {
+						insertEdge(writer, i, j, n++);
+					}
 				}
 			}
 		}
@@ -109,7 +115,7 @@ public class GEXFMaker {
 		double km = obj.getDistance();
 		double minutes = obj.getTime();
 		
-		writer.write("			<edge id=\"" + n + "\" source=\"" + src + "\" target=\"" + dst + "\">\r\n" + 
+		writer.write("			<edge id=\"" + n + "\" source=\"" + src + "\" target=\"" + dst + "\" weight=\"" + minutes + "\">\r\n" + 
 				"				<attvalues>\r\n" + 
 				"					<attvalue for=\"0\" value=\"" + km + "\"/>\r\n" + 
 				"					<attvalue for=\"1\" value=\"" + minutes + "\"/>\r\n" + 
