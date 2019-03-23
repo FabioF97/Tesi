@@ -76,12 +76,40 @@ public class GEXFMaker {
 				"			</node>\r\n");
 	}
 	
+	/**
+	 * Controlla data una coppia di capoluoghi se tra i due si può
+	 * instaurare un edge. Ciò avviene nei casi in cui i capoluoghi
+	 * siano in regioni confinanti, nella stessa regione oppure 
+	 * se sono particolari bridge
+	 * @param src
+	 * @param dst
+	 * @param borders
+	 * @return
+	 */
 	private boolean checkEdge(ChiefTown src, ChiefTown dst, ArrayList<String> borders) {
 		if(borders.contains(dst.getRegion()))
 			return true;
 		if(src.getRegion().equals(dst.getRegion()))
 			return true;
 		if("Palermo".equals(src.getName()) && "Cagliari".equals(dst.getName()))
+			return true;
+		if("Reggio di Calabria".equals(src.getName()) && "Messina".equals(dst.getName()))
+			return true;
+		if("Sassari".equals(src.getName()) && "Roma".equals(dst.getName()))
+			return true;
+		if("Roma".equals(src.getName()) && "Cagliari".equals(dst.getName()))
+			return true;
+		if("Roma".equals(src.getName()) && "Nuoro".equals(dst.getName()))
+			return true;
+		if("Sassari".equals(src.getName()) && "Grosseto".equals(dst.getName()))
+			return true;
+		if("Sassari".equals(src.getName()) && "Livorno".equals(dst.getName()))
+			return true;
+		if("Sassari".equals(src.getName()) && "Genova".equals(dst.getName()))
+			return true;
+		if("Nuoro".equals(src.getName()) && "Genova".equals(dst.getName()))
+			return true;
+		if("Napoli".equals(src.getName()) && "Cagliari".equals(dst.getName()))
 			return true;
 		return false;
 	}
