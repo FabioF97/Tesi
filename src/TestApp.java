@@ -100,9 +100,22 @@ public class TestApp {
 	
 	public static void main(String[] args) throws IOException, ResourceException, ParseException {
 		//reso il grafico undirected
+		int k = 1;
+		double min = 2000;
+		ChiefTown src = null;
+		ChiefTown dst = null;
 		Matrix matrix = InitializeMatrix.loadMatrix();
-		new GEXFMaker(matrix);
-		System.out.println("Fine");
+		matrix.printHighestSpeed();
+		matrix.printLowestSpeed();
+		//FileSerialization f = new FileSerialization();
+		//f.writeMatrix(matrix);
+		
+		//FileSerialization f = new FileSerialization();
+		//f.writeMatrix(matrix);
+		//BISOGNA CAMBIARE IL PERCORSO PER SICUREZZA E SALVARE LA NUOVA MATRICE, VERIFICARE CHE NULLA SI SIA CORROTTO, IL VECCHIO FILE SER E' SUL DESKTOP E GITHUB
+		
+		//new GEXFMaker(matrix);
+		//System.out.println("Fine");
 		
 		
 	}

@@ -7,6 +7,7 @@ public class MatrixObject implements Serializable{
 	ChiefTown dest;
 	double distance;
 	double time;
+	double avgSpeed;
 	
 	public MatrixObject(ChiefTown src, ChiefTown dest, double distance, double time) {
 		this.src = src;
@@ -27,6 +28,10 @@ public class MatrixObject implements Serializable{
 
 	public void setSrc(ChiefTown src) {
 		this.src = src;
+	}
+	
+	public double getAvgSpeed() {
+		return avgSpeed;
 	}
 
 
@@ -65,11 +70,17 @@ public class MatrixObject implements Serializable{
 		this.time = time;
 	}
 
-
+	public void computeAvgSpeed() {
+		if(time == 0 || distance == 0) {
+			this.avgSpeed = .0;
+			return;
+		}
+		this.avgSpeed = distance/(time/60);
+	}
 
 	@Override
 	public String toString() {
-		return src.getName() + "-->" + dest.getName() + " " + distance + "km, " + time + "m";
+		return src.getName() + "-->" + dest.getName() + " " + distance + "km, " + time + "m, " + avgSpeed + "km/h";
 	}
 
 }

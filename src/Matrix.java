@@ -2,6 +2,7 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.json.simple.JSONArray;
@@ -125,11 +126,594 @@ public class Matrix implements Serializable{
 		}
 	}
 	
+	public void printNearestDistance() {
+		MatrixObject[] array = new MatrixObject[5];
+		for(int i = 0; i < 109; ++i) {
+			for(int j = 0; j < i; ++j) {
+				if(i != j) {
+					if(array[0] == null) {
+						array[0] = matrix[i][j];
+						continue;
+					}
+					else {
+						if(matrix[i][j].getDistance() < array[0].getDistance()) {
+							array[4] = array[3];
+							array[3] = array[2];
+							array[2] = array[1];
+							array[1] = array[0];
+							array[0] = matrix[i][j];
+							continue;
+						}
+					}
+					if(array[1] == null) {
+						array[1] = matrix[i][j];
+						continue;
+					}
+					else {
+						if(matrix[i][j].getDistance() < array[1].getDistance()) {
+							array[4] = array[3];
+							array[3] = array[2];
+							array[2] = array[1];
+							array[1] = matrix[i][j];
+							continue;
+						}
+					}
+					if(array[2] == null) {
+						array[2] = matrix[i][j];
+						continue;
+					}
+					else {
+						if(matrix[i][j].getDistance() < array[2].getDistance()) {
+							array[4] = array[3];
+							array[3] = array[2];
+							array[2] = matrix[i][j];
+							continue;
+						}
+					}
+					if(array[3] == null) {
+						array[3] = matrix[i][j];
+						continue;
+					}
+					else {
+						if(matrix[i][j].getDistance() < array[3].getDistance()) {
+							array[4] = array[3];
+							array[3] = matrix[i][j];
+							continue;
+						}
+					}
+					if(array[4] == null) {
+						array[4] = matrix[i][j];
+						continue;
+					}
+					else {
+						if(matrix[i][j].getDistance() < array[4].getDistance()) {
+							array[4] = matrix[i][j];
+							continue;
+						}
+					}
+				}
+			}
+		}
+		int k = 1;
+		for(MatrixObject obj: array) {
+			System.out.println(k++ + ") " + obj);
+		}
+	}
+	
+	public void printNearestTime() {
+		MatrixObject[] array = new MatrixObject[5];
+		for(int i = 0; i < 109; ++i) {
+			for(int j = 0; j < i; ++j) {
+				if(i != j) {
+					if(array[0] == null) {
+						array[0] = matrix[i][j];
+						continue;
+					}
+					else {
+						if(matrix[i][j].getTime() < array[0].getTime()) {
+							array[4] = array[3];
+							array[3] = array[2];
+							array[2] = array[1];
+							array[1] = array[0];
+							array[0] = matrix[i][j];
+							continue;
+						}
+					}
+					if(array[1] == null) {
+						array[1] = matrix[i][j];
+						continue;
+					}
+					else {
+						if(matrix[i][j].getTime() < array[1].getTime()) {
+							array[4] = array[3];
+							array[3] = array[2];
+							array[2] = array[1];
+							array[1] = matrix[i][j];
+							continue;
+						}
+					}
+					if(array[2] == null) {
+						array[2] = matrix[i][j];
+						continue;
+					}
+					else {
+						if(matrix[i][j].getTime() < array[2].getTime()) {
+							array[4] = array[3];
+							array[3] = array[2];
+							array[2] = matrix[i][j];
+							continue;
+						}
+					}
+					if(array[3] == null) {
+						array[3] = matrix[i][j];
+						continue;
+					}
+					else {
+						if(matrix[i][j].getTime() < array[3].getTime()) {
+							array[4] = array[3];
+							array[3] = matrix[i][j];
+							continue;
+						}
+					}
+					if(array[4] == null) {
+						array[4] = matrix[i][j];
+						continue;
+					}
+					else {
+						if(matrix[i][j].getTime() < array[4].getTime()) {
+							array[4] = matrix[i][j];
+							continue;
+						}
+					}
+				}
+			}
+		}
+		int k = 1;
+		for(MatrixObject obj: array) {
+			System.out.println(k++ + ") " + obj);
+		}
+	}
+	
+	public void printLowestAvgSpeed() {
+		MatrixObject[] array = new MatrixObject[5];
+		for(int i = 0; i < 109; ++i) {
+			for(int j = 0; j < i; ++j) {
+				if(getTown(i).getRegion().equals("Sardegna")) {
+					if(!getTown(j).getRegion().equals("Sardegna")) {
+						continue;
+					}
+				}
+				if(getTown(i).getRegion().equals("Sicilia")) {
+					if(!getTown(j).getRegion().equals("Sicilia")) {
+						continue;
+					}
+				}
+				if(getTown(j).getRegion().equals("Sardegna")) {
+					if(!getTown(i).getRegion().equals("Sardegna")) {
+						continue;
+					}
+				}
+				if(getTown(j).getRegion().equals("Sicilia")) {
+					if(!getTown(i).getRegion().equals("Sicilia")) {
+						continue;
+					}
+				}
+				if(i != j) {
+					if(array[0] == null) {
+						array[0] = matrix[i][j];
+						continue;
+					}
+					else {
+						if(matrix[i][j].getAvgSpeed() < array[0].getAvgSpeed()) {
+							array[4] = array[3];
+							array[3] = array[2];
+							array[2] = array[1];
+							array[1] = array[0];
+							array[0] = matrix[i][j];
+							continue;
+						}
+					}
+					if(array[1] == null) {
+						array[1] = matrix[i][j];
+						continue;
+					}
+					else {
+						if(matrix[i][j].getAvgSpeed() < array[1].getAvgSpeed()) {
+							array[4] = array[3];
+							array[3] = array[2];
+							array[2] = array[1];
+							array[1] = matrix[i][j];
+							continue;
+						}
+					}
+					if(array[2] == null) {
+						array[2] = matrix[i][j];
+						continue;
+					}
+					else {
+						if(matrix[i][j].getAvgSpeed() < array[2].getAvgSpeed()) {
+							array[4] = array[3];
+							array[3] = array[2];
+							array[2] = matrix[i][j];
+							continue;
+						}
+					}
+					if(array[3] == null) {
+						array[3] = matrix[i][j];
+						continue;
+					}
+					else {
+						if(matrix[i][j].getAvgSpeed() < array[3].getAvgSpeed()) {
+							array[4] = array[3];
+							array[3] = matrix[i][j];
+							continue;
+						}
+					}
+					if(array[4] == null) {
+						array[4] = matrix[i][j];
+						continue;
+					}
+					else {
+						if(matrix[i][j].getAvgSpeed() < array[4].getAvgSpeed()) {
+							array[4] = matrix[i][j];
+							continue;
+						}
+					}
+				}
+			}
+		}
+		int k = 1;
+		for(MatrixObject obj: array) {
+			System.out.println(k++ + ") " + obj);
+		}
+	}
+	
+	public void printFurthestDistance() {
+		MatrixObject[] array = new MatrixObject[5];
+		for(int i = 0; i < 109; ++i) {
+			if(getTown(i).getRegion().equals("Sardegna") || getTown(i).getRegion().equals("Sicilia"))
+				continue;
+			for(int j = 0; j < i; ++j) {
+				if(getTown(j).getRegion().equals("Sardegna") || getTown(j).getRegion().equals("Sicilia"))
+					continue;
+				if(i != j) {
+					if(array[0] == null) {
+						array[0] = matrix[i][j];
+						continue;
+					}
+					else {
+						if(matrix[i][j].getDistance() > array[0].getDistance()) {
+							array[4] = array[3];
+							array[3] = array[2];
+							array[2] = array[1];
+							array[1] = array[0];
+							array[0] = matrix[i][j];
+							continue;
+						}
+					}
+					if(array[1] == null) {
+						array[1] = matrix[i][j];
+						continue;
+					}
+					else {
+						if(matrix[i][j].getDistance() > array[1].getDistance()) {
+							array[4] = array[3];
+							array[3] = array[2];
+							array[2] = array[1];
+							array[1] = matrix[i][j];
+							continue;
+						}
+					}
+					if(array[2] == null) {
+						array[2] = matrix[i][j];
+						continue;
+					}
+					else {
+						if(matrix[i][j].getDistance() > array[2].getDistance()) {
+							array[4] = array[3];
+							array[3] = array[2];
+							array[2] = matrix[i][j];
+							continue;
+						}
+					}
+					if(array[3] == null) {
+						array[3] = matrix[i][j];
+						continue;
+					}
+					else {
+						if(matrix[i][j].getDistance() > array[3].getDistance()) {
+							array[4] = array[3];
+							array[3] = matrix[i][j];
+							continue;
+						}
+					}
+					if(array[4] == null) {
+						array[4] = matrix[i][j];
+						continue;
+					}
+					else {
+						if(matrix[i][j].getDistance() > array[4].getDistance()) {
+							array[4] = matrix[i][j];
+							continue;
+						}
+					}
+				}
+			}
+		}
+		int k = 1;
+		for(MatrixObject obj: array) {
+			System.out.println(k++ + ") " + obj);
+		}
+	}
+	public void printHighestAvgSpeed() {
+		MatrixObject[] array = new MatrixObject[5];
+		for(int i = 0; i < 109; ++i) {
+			if(getTown(i).getRegion().equals("Sardegna") || getTown(i).getRegion().equals("Sicilia"))
+				continue;
+			for(int j = 0; j < i; ++j) {
+				if(getTown(j).getRegion().equals("Sardegna") || getTown(j).getRegion().equals("Sicilia"))
+					continue;
+				if(i != j) {
+					if(array[0] == null) {
+						array[0] = matrix[i][j];
+						continue;
+					}
+					else {
+						if(matrix[i][j].getAvgSpeed() > array[0].getAvgSpeed()) {
+							array[4] = array[3];
+							array[3] = array[2];
+							array[2] = array[1];
+							array[1] = array[0];
+							array[0] = matrix[i][j];
+							continue;
+						}
+					}
+					if(array[1] == null) {
+						array[1] = matrix[i][j];
+						continue;
+					}
+					else {
+						if(matrix[i][j].getAvgSpeed() > array[1].getAvgSpeed()) {
+							array[4] = array[3];
+							array[3] = array[2];
+							array[2] = array[1];
+							array[1] = matrix[i][j];
+							continue;
+						}
+					}
+					if(array[2] == null) {
+						array[2] = matrix[i][j];
+						continue;
+					}
+					else {
+						if(matrix[i][j].getAvgSpeed() > array[2].getAvgSpeed()) {
+							array[4] = array[3];
+							array[3] = array[2];
+							array[2] = matrix[i][j];
+							continue;
+						}
+					}
+					if(array[3] == null) {
+						array[3] = matrix[i][j];
+						continue;
+					}
+					else {
+						if(matrix[i][j].getAvgSpeed() > array[3].getAvgSpeed()) {
+							array[4] = array[3];
+							array[3] = matrix[i][j];
+							continue;
+						}
+					}
+					if(array[4] == null) {
+						array[4] = matrix[i][j];
+						continue;
+					}
+					else {
+						if(matrix[i][j].getAvgSpeed() > array[4].getAvgSpeed()) {
+							array[4] = matrix[i][j];
+							continue;
+						}
+					}
+				}
+			}
+		}
+		int k = 1;
+		for(MatrixObject obj: array) {
+			System.out.println(k++ + ") " + obj);
+		}
+	}
+	
+	public void printFurthestTime() {
+		MatrixObject[] array = new MatrixObject[5];
+		for(int i = 0; i < 109; ++i) {
+			if(getTown(i).getRegion().equals("Sardegna") || getTown(i).getRegion().equals("Sicilia"))
+				continue;
+			for(int j = 0; j < i; ++j) {
+				if(getTown(j).getRegion().equals("Sardegna") || getTown(j).getRegion().equals("Sicilia"))
+					continue;
+				if(i != j) {
+					if(array[0] == null) {
+						array[0] = matrix[i][j];
+						continue;
+					}
+					else {
+						if(matrix[i][j].getTime() > array[0].getTime()) {
+							array[4] = array[3];
+							array[3] = array[2];
+							array[2] = array[1];
+							array[1] = array[0];
+							array[0] = matrix[i][j];
+							continue;
+						}
+					}
+					if(array[1] == null) {
+						array[1] = matrix[i][j];
+						continue;
+					}
+					else {
+						if(matrix[i][j].getTime() > array[1].getTime()) {
+							array[4] = array[3];
+							array[3] = array[2];
+							array[2] = array[1];
+							array[1] = matrix[i][j];
+							continue;
+						}
+					}
+					if(array[2] == null) {
+						array[2] = matrix[i][j];
+						continue;
+					}
+					else {
+						if(matrix[i][j].getTime() > array[2].getTime()) {
+							array[4] = array[3];
+							array[3] = array[2];
+							array[2] = matrix[i][j];
+							continue;
+						}
+					}
+					if(array[3] == null) {
+						array[3] = matrix[i][j];
+						continue;
+					}
+					else {
+						if(matrix[i][j].getTime() > array[3].getTime()) {
+							array[4] = array[3];
+							array[3] = matrix[i][j];
+							continue;
+						}
+					}
+					if(array[4] == null) {
+						array[4] = matrix[i][j];
+						continue;
+					}
+					else {
+						if(matrix[i][j].getTime() > array[4].getTime()) {
+							array[4] = matrix[i][j];
+							continue;
+						}
+					}
+				}
+			}
+		}
+		int k = 1;
+		for(MatrixObject obj: array) {
+			System.out.println(k++ + ") " + obj);
+		}
+	}
+	
 	public void printRow(int i) {
 		MatrixObject[] row = matrix[i];
 		for(int j = 0; j < list.size(); ++j) {
 			System.out.println(row[j]);
 		}
+	}
+	
+	public void printLowestAvgDistance() {
+		double avgDistance = 0;
+		double nTown = 109 - 1;
+		String name = null;
+		double best = 9000;
+		for(int j = 0; j < 109; ++j) {
+			for(int i = 0; i < 109; ++i) {
+				avgDistance += matrix[i][j].getDistance();
+			}
+			avgDistance = avgDistance / nTown;
+			if(avgDistance < best) {
+				name = getTown(j).getName();
+				best = avgDistance;
+			}
+		}
+		System.out.println(name + " average distance = " + best);
+	}
+	
+	public void printHighestAvgDistance() {
+		double avgDistance = 0;
+		double nTown = 109 - 1;
+		String name = null;
+		double best = 0;
+		for(int j = 0; j < 109; ++j) {
+			for(int i = 0; i < 109; ++i) {
+				avgDistance += matrix[i][j].getDistance();
+			}
+			avgDistance = avgDistance / nTown;
+			if(avgDistance > best) {
+				name = getTown(j).getName();
+				best = avgDistance;
+			}
+		}
+		System.out.println(name + " average distance = " + best);
+	}
+	
+	public void printLowestAvgTime() {
+		double avgTime = 0;
+		double nTown = 109 - 1;
+		String name = null;
+		double best = 9000;
+		for(int j = 0; j < 109; ++j) {
+			for(int i = 0; i < 109; ++i) {
+				avgTime += matrix[i][j].getTime();
+			}
+			avgTime = avgTime / nTown;
+			if(avgTime < best) {
+				name = getTown(j).getName();
+				best = avgTime;
+			}
+		}
+		System.out.println(name + " average time = " + best);
+	}
+	
+	public void printHighestAvgTime() {
+		double avgTime = 0;
+		double nTown = 109 - 1;
+		String name = null;
+		double best = 0;
+		for(int j = 0; j < 109; ++j) {
+			for(int i = 0; i < 109; ++i) {
+				avgTime += matrix[i][j].getTime();
+			}
+			avgTime = avgTime / nTown;
+			if(avgTime > best) {
+				name = getTown(j).getName();
+				best = avgTime;
+			}
+		}
+		System.out.println(name + " average time = " + best);
+	}
+	
+	public void printLowestSpeed() {
+		double avgSpeed = 0;
+		double nTown = 109 - 1;
+		String name = null;
+		double best = 9000;
+		for(int j = 0; j < 109; ++j) {
+			for(int i = 0; i < 109; ++i) {
+				avgSpeed += matrix[i][j].getAvgSpeed();
+			}
+			avgSpeed = avgSpeed / nTown;
+			if(avgSpeed < best) {
+				name = getTown(j).getName();
+				best = avgSpeed;
+			}
+		}
+		System.out.println(name + " average speed = " + best);
+	}
+	
+	public void printHighestSpeed() {
+		double avgSpeed = 0;
+		double nTown = 109 - 1;
+		String name = null;
+		double best = 0;
+		for(int j = 0; j < 109; ++j) {
+			for(int i = 0; i < 109; ++i) {
+				avgSpeed += matrix[i][j].getAvgSpeed();
+			}
+			avgSpeed = avgSpeed / nTown;
+			if(avgSpeed > best) {
+				name = getTown(j).getName();
+				best = avgSpeed;
+			}
+		}
+		System.out.println(name + " average speed = " + best);
 	}
 	
 	public void print2D() {
